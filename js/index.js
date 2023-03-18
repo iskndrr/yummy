@@ -44,14 +44,14 @@ $('.toggle').click(function () {
     }
 
 })
-function responsiveNav(){
+function responsiveNav() {
     if ($("html,body").innerWidth() < 800) {
         $('nav').removeClass('w-25').addClass('w-50')
-        
-      }else{
+
+    } else {
         $('nav').removeClass('w-50')
 
-      }
+    }
 } responsiveNav()
 /*-----------api intro -----------*/
 async function apiIntro() {
@@ -147,16 +147,21 @@ $('#searchbtn').click(() => {
 })
 /* ---------search by name function------------ */
 $("#searchName").keyup(async () => {
+
+    $(".loading-screen").fadeIn(300, () => {
+        $("#searchResult").fadeIn(300)
+    })
     let searchNVal = $("#searchName").val()
     await searchByName(searchNVal)
+    $(".loading-screen").fadeOut(300)
+
     console.log(searchNVal)
 })
 async function searchByName(searchNVal) {
-    $(".loading-screen").fadeIn(300)
+
     let searchRes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchNVal}`)
     let finalSRes = await searchRes.json()
     // console.log(finalSRes);
-    $(".loading-screen").fadeOut(300)
     searchNameRes(finalSRes)
 
 }
@@ -179,8 +184,9 @@ function searchNameRes(arr) {
 }
 /*-----------------search by First Letter---------- */
 $("#searchFLetter").keyup(async () => {
-    $(".loading-screen").fadeIn(300)
-
+    $(".loading-screen").fadeIn(300, () => {
+        $("#searchResult").fadeIn(300)
+    })
     let searchFVal = $("#searchFLetter").val()
     $(".loading-screen").fadeOut(300)
     await firstLetterS(searchFVal)
@@ -232,7 +238,7 @@ function displayCategories(arr) {
 }
 async function getCategoryMeals(category) {
     $(".loading-screen").fadeIn(300)
-    
+
     $('#search , #category,#area,.ingredients').fadeOut(500, () => {
         $('main').fadeIn(500)
     })
@@ -334,7 +340,7 @@ async function getIngredientsMeals(ingredients) {
 
     $(".loading-screen").fadeOut(300)
     displayMeals(response)
-    
+
 
 
 }
@@ -385,93 +391,93 @@ let passwordInputTouched = false;
 let repasswordInputTouched = false;
 
 function inputsValidation() {
-if (nameInputTouched) {
-    if (nameValidation()) {
-        document.getElementById("nameAlert").classList.replace("d-block", "d-none")
+    if (nameInputTouched) {
+        if (nameValidation()) {
+            document.getElementById("nameAlert").classList.replace("d-block", "d-none")
 
-    } else {
-        document.getElementById("nameAlert").classList.replace("d-none", "d-block")
+        } else {
+            document.getElementById("nameAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
-if (emailInputTouched) {
+    if (emailInputTouched) {
 
-    if (emailValidation()) {
-        document.getElementById("emailAlert").classList.replace("d-block", "d-none")
-    } else {
-        document.getElementById("emailAlert").classList.replace("d-none", "d-block")
+        if (emailValidation()) {
+            document.getElementById("emailAlert").classList.replace("d-block", "d-none")
+        } else {
+            document.getElementById("emailAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
 
-if (phoneInputTouched) {
-    if (phoneValidation()) {
-        document.getElementById("phoneAlert").classList.replace("d-block", "d-none")
-    } else {
-        document.getElementById("phoneAlert").classList.replace("d-none", "d-block")
+    if (phoneInputTouched) {
+        if (phoneValidation()) {
+            document.getElementById("phoneAlert").classList.replace("d-block", "d-none")
+        } else {
+            document.getElementById("phoneAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
 
-if (ageInputTouched) {
-    if (ageValidation()) {
-        document.getElementById("ageAlert").classList.replace("d-block", "d-none")
-    } else {
-        document.getElementById("ageAlert").classList.replace("d-none", "d-block")
+    if (ageInputTouched) {
+        if (ageValidation()) {
+            document.getElementById("ageAlert").classList.replace("d-block", "d-none")
+        } else {
+            document.getElementById("ageAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
 
-if (passwordInputTouched) {
-    if (passwordValidation()) {
-        document.getElementById("passwordAlert").classList.replace("d-block", "d-none")
-    } else {
-        document.getElementById("passwordAlert").classList.replace("d-none", "d-block")
+    if (passwordInputTouched) {
+        if (passwordValidation()) {
+            document.getElementById("passwordAlert").classList.replace("d-block", "d-none")
+        } else {
+            document.getElementById("passwordAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
-if (repasswordInputTouched) {
-    if (repasswordValidation()) {
-        document.getElementById("repasswordAlert").classList.replace("d-block", "d-none")
-    } else {
-        document.getElementById("repasswordAlert").classList.replace("d-none", "d-block")
+    if (repasswordInputTouched) {
+        if (repasswordValidation()) {
+            document.getElementById("repasswordAlert").classList.replace("d-block", "d-none")
+        } else {
+            document.getElementById("repasswordAlert").classList.replace("d-none", "d-block")
 
+        }
     }
-}
 
 
-if (nameValidation() &&
-    emailValidation() &&
-    phoneValidation() &&
-    ageValidation() &&
-    passwordValidation() &&
-    repasswordValidation()) {
-    submitBtn.removeAttribute("disabled")
-} else {
-    submitBtn.setAttribute("disabled", true)
-}
+    if (nameValidation() &&
+        emailValidation() &&
+        phoneValidation() &&
+        ageValidation() &&
+        passwordValidation() &&
+        repasswordValidation()) {
+        submitBtn.removeAttribute("disabled")
+    } else {
+        submitBtn.setAttribute("disabled", true)
+    }
 }
 
 function nameValidation() {
-return (/^[a-zA-Z ]+$/.test(document.getElementById("nameInput").value))
+    return (/^[a-zA-Z ]+$/.test(document.getElementById("nameInput").value))
 }
 
 function emailValidation() {
-return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(document.getElementById("emailInput").value))
+    return (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(document.getElementById("emailInput").value))
 }
 
 function phoneValidation() {
-return (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(document.getElementById("phoneInput").value))
+    return (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(document.getElementById("phoneInput").value))
 }
 
 function ageValidation() {
-return (/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/.test(document.getElementById("ageInput").value))
+    return (/^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|200)$/.test(document.getElementById("ageInput").value))
 }
 
 function passwordValidation() {
-return (/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/.test(document.getElementById("passwordInput").value))
+    return (/^(?=.*\d)(?=.*[a-z])[0-9a-zA-Z]{8,}$/.test(document.getElementById("passwordInput").value))
 }
 
 function repasswordValidation() {
-return document.getElementById("repasswordInput").value == document.getElementById("passwordInput").value
+    return document.getElementById("repasswordInput").value == document.getElementById("passwordInput").value
 }
