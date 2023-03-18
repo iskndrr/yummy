@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+/* -----body bg----- */
+li{
+    padding: 0;
+}
+.dark{
+    background-color: #000;
+}
+/* ------navbar----- */
+nav{
+    z-index: 999999;
+    /* overflow: hidden; */
+}
+/* --------image hover effect------- */
+
+.img:hover .bg-layer{
+top: 0;
+bottom: 0;
+display: flex;
+opacity: 1;
+transition: top .6s ease-in-out;
+}
+
+ .contactUs,.mealDetails,.search,.category,.area,.ingredients,#open{
+    display: none;
+}
+.h-100vh{
+    height: 100vh;
+}
+.alert{
+    width: fit-content;
+}
+.bg-layer{
+    opacity: 0;
+    top: 90%;
+    background-color: #f2e2c7cd;
+
+}
+.recipes li{
+    flex: 20%;
+    margin: .5rem .5rem;
+}
+
+i{
+    color: #000;
+    cursor: pointer;
+}
+#navBar li{
+ margin:1rem 0 ;
+ cursor: pointer;
+}
+
+
+.loading-screen{
+    z-index: 9999;
+    display: flex;
+}
+
